@@ -59,7 +59,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
-				<h3>Task 4</h3>
+				<h3>Touch Gestures</h3>
 				<div class="box-container">
 					<div class="large-box">
 						<div class="small-box" id="rotate-box">Rotate</div>
@@ -84,7 +84,57 @@
 		</div>
 	</div>
 	<script>
-	  // your solution here
+    $(document).ready(() => {
+      var rotate_hammer = new Hammer(document.getElementById('rotate-box'));
+    
+      rotate_hammer.get('rotate').set({ enable: true });
+
+      rotate_hammer.on('rotate', function(ev) {
+        document.getElementById("rotate-box").style.transform = "rotate(" + ev.rotation + "deg)";
+      });
+
+      var press_hammer = new Hammer(document.getElementById('press-box'));
+    
+      press_hammer.on('press', function() {
+        document.getElementById("press-box").style.backgroundColor = "coral";
+      });
+      
+      press_hammer.on('pressup', function() {
+        document.getElementById("press-box").style.backgroundColor = "#7ce6df";
+      });
+      
+      var tap_hammer = new Hammer(document.getElementById('tap-box'));
+    
+      tap_hammer.on('tap', function() {
+        if (document.getElementById("tap-box").style.backgroundColor == "coral") {
+          document.getElementById("tap-box").style.backgroundColor = "#7ce6df";
+        } else {
+          document.getElementById("tap-box").style.backgroundColor = "coral";
+        }
+      });
+      
+      var pan_hammer = new Hammer(document.getElementById('pan-box'));
+      
+      pan_hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+      
+      pan_hammer.on('panleft panright', function(ev) {
+        document.getElementById("pan-box").style.transform = "translateX(" + ev.deltaX + "px)";
+      });
+      
+      pan_hammer.on('panup pandown', function(ev) {
+        document.getElementById("pan-box").style.transform = "translateY(" + ev.deltaY + "px)";
+      });
+      
+      var pinch_hammer = new Hammer(document.getElementById('pinch-box'));
+      
+      pinch_hammer.get('pinch').set({ enable: true });
+      
+      pinch_hammer.on('pinch', function(ev) {
+        document.getElementById("pinch-box").style.transform = "scale(" + ev. + "px)";
+      });
+      
+    });
+    
   </script>
 </body>
 </html>
