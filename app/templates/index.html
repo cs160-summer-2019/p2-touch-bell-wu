@@ -85,6 +85,7 @@
 	</div>
 	<script>
     $(document).ready(() => {
+      
       var rotate_hammer = new Hammer(document.getElementById('rotate-box'));
     
       rotate_hammer.get('rotate').set({ enable: true });
@@ -130,9 +131,16 @@
       pinch_hammer.get('pinch').set({ enable: true });
       
       pinch_hammer.on('pinch', function(ev) {
-        document.getElementById("pinch-box").style.transform = "scale(" + ev. + "px)";
+        document.getElementById("pinch-box").style.transform = "scale(" + ev.scale + ", " + ev.scale + ")";
       });
       
+      var swipe_hammer = new Hammer(document.getElementById('swipe-box'));
+      
+      swipe_hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+
+      swipe_hammer.on('swipe', function(ev) {
+        document.getElementById("swipe-box").style.transform = "translate(" + ev.deltaX + "px, " + ev.deltaY + "px)";
+      });
     });
     
   </script>
